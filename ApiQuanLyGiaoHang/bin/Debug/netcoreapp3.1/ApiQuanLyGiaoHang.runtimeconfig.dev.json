@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\HiepTran\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\HiepTran\\.nuget\\packages"
+    ]
+  }
+}
