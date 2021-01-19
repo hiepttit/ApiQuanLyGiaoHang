@@ -56,74 +56,74 @@ namespace ApiQuanLyGiaoHang.Controllers
             return false;
         }
 
-        //[HttpPost]
-        //[Route("login")]
-        //public async Task<IActionResult> Login([FromBody] LoginModel model)
-        //{
-        //    try
-        //    {
-        //        var user = _db.TheUsers.FirstOrDefault(f => f.UserName == model.Username);
-        //        if (user != null && CheckPasswordUser(user, model.Password))
-        //        {
-        //            var userRoles = _db.TheRoles.Where(f => f.Id == user.IdRole).ToList();
-        //            var authClaims = new List<Claim>
-        //            {
-        //                new Claim(ClaimTypes.Name, user.UserName),
-        //                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        //            };
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        {
+            try
+            {
+                var user = _db.TheUsers.FirstOrDefault(f => f.UserName == model.Username);
+                if (user != null && CheckPasswordUser(user, model.Password))
+                {
+                    var userRoles = _db.TheRoles.Where(f => f.Id == user.IdRole).ToList();
+                    var authClaims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    };
 
-        //            foreach (var userRole in userRoles)
-        //            {
-        //                var role = _db.TheRoles.FirstOrDefault(f => f.Id == userRole.Id);
-        //                if (role != null)
-        //                {
-        //                    authClaims.Add(new Claim(ClaimTypes.Role, role.Name));
-        //                }
+                    foreach (var userRole in userRoles)
+                    {
+                        var role = _db.TheRoles.FirstOrDefault(f => f.Id == userRole.Id);
+                        if (role != null)
+                        {
+                            authClaims.Add(new Claim(ClaimTypes.Role, role.Name));
+                        }
 
-        //            }
+                    }
 
-        //            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+                    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
-        //            var token = new JwtSecurityToken(
-        //                issuer: _configuration["JWT:ValidIssuer"],
-        //                audience: _configuration["JWT:ValidAudience"],
-        //                expires: DateTime.Now.AddDays(1),
-        //                claims: authClaims,
-        //                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-        //                );
+                    var token = new JwtSecurityToken(
+                        issuer: _configuration["JWT:ValidIssuer"],
+                        audience: _configuration["JWT:ValidAudience"],
+                        expires: DateTime.Now.AddDays(1),
+                        claims: authClaims,
+                        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                        );
 
-        //            // luu vao db a
-        //            var loginToken = new JwtSecurityTokenHandler().WriteToken(token);
-        //            var oldToken = _db.TokenUsers.FirstOrDefault(x => x.Id == loginToken);
-        //            if (oldToken == null)
-        //            {
-        //                var inFoToken = authClaims.FirstOrDefault(f => f.Type == "jti");
-        //                oldToken = new UserToken { Id = inFoToken.Value, UserName = user.UserName, Token = loginToken };
-        //                await _db.UserTokens.AddAsync(oldToken);
-        //                await _db.SaveChangesAsync();
-        //            }
+                    // luu vao db a
+                    var loginToken = new JwtSecurityTokenHandler().WriteToken(token);
+                    var oldToken = _db.TokenUsers.FirstOrDefault(x => x.IdToken == loginToken);
+                    if (oldToken == null)
+                    {
+                        var inFoToken = authClaims.FirstOrDefault(f => f.Type == "jti");
+                        oldToken = new TokenUser { IdToken = inFoToken.Value, UserName = user.UserName, Token = loginToken };
+                        await _db.TokenUsers.AddAsync(oldToken);
+                        await _db.SaveChangesAsync();
+                    }
 
-        //            return Ok(new
-        //            {
-        //                token = loginToken,
-        //                expiration = token.ValidTo
-        //            });
-        //        }
-        //        return Unauthorized();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        return Ok(new
-        //        {
-        //            ErrorMessage = exception.Message,
-        //            Source = exception.Source,
-        //            StackTrace = exception.StackTrace,
-        //            Target = exception.TargetSite?.ToString(),
-        //            // You should fill this property with details here.
-        //            InnerExceptionMessage = exception.InnerException?.Message
-        //        });
-        //    }
-        //}
+                    return Ok(new
+                    {
+                        token = loginToken,
+                        expiration = token.ValidTo
+                    });
+                }
+                return Unauthorized();
+            }
+            catch (Exception exception)
+            {
+                return Ok(new
+                {
+                    ErrorMessage = exception.Message,
+                    Source = exception.Source,
+                    StackTrace = exception.StackTrace,
+                    Target = exception.TargetSite?.ToString(),
+                    // You should fill this property with details here.
+                    InnerExceptionMessage = exception.InnerException?.Message
+                });
+            }
+        }
         //[HttpPost]
         //[Route("register")]
         //public async Task<IActionResult> Register([FromBody] RegisterModel model)
@@ -194,20 +194,20 @@ namespace ApiQuanLyGiaoHang.Controllers
         //    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
         //}
 
-        //[HttpPost]
-        //[Route("logout")]
-        //[CustomAuthorization]
-        //public async Task<IActionResult> Logout()
-        //{
-        //    var IDtoken = User.Claims.FirstOrDefault(c => c.Type == "jti");
-        //    var token = _db.TokenUsers.FirstOrDefault(f => f.Id == IDtoken.Value);
-        //    if (token != null)
-        //    {
-        //        _db.TokenUsers.Remove(token);
-        //        await _db.SaveChangesAsync();
-        //        return Ok(new Response { Status = "Success", Message = "Logout Success!" });
-        //    }
-        //    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Logout Fail!" });
-        //}
+        [HttpPost]
+        [Route("logout")]
+        [CustomAuthorization]
+        public async Task<IActionResult> Logout()
+        {
+            var IDtoken = User.Claims.FirstOrDefault(c => c.Type == "jti");
+            var token = _db.TokenUsers.FirstOrDefault(f => f.IdToken == IDtoken.Value);
+            if (token != null)
+            {
+                _db.TokenUsers.Remove(token);
+                await _db.SaveChangesAsync();
+                return Ok(new Response { Status = "Success", Message = "Logout Success!" });
+            }
+            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Logout Fail!" });
+        }
     }
 }

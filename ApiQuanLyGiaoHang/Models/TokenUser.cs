@@ -7,11 +7,9 @@ namespace ApiQuanLyGiaoHang.Models
 {
     public partial class TokenUser
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
+        public string IdToken { get; set; }
+        public string UserName { get; set; }
         public string Token { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+        public string Roles { get; set; }
     }
 }

@@ -246,28 +246,32 @@ namespace ApiQuanLyGiaoHang.Models
 
             modelBuilder.Entity<TokenUser>(entity =>
             {
+                entity.HasKey(e => e.IdToken)
+                    .HasName("PK__TokenUse__FEFE350D7A951719");
+
                 entity.ToTable("TokenUser");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.IdToken)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("idToken");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdAt");
-
-                entity.Property(e => e.DeletedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("deletedAt");
+                entity.Property(e => e.Roles)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("roles");
 
                 entity.Property(e => e.Token)
+                    .IsRequired()
                     .HasMaxLength(1000)
                     .IsUnicode(false)
                     .HasColumnName("token");
 
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedAt");
-
-                entity.Property(e => e.UserId).HasColumnName("userId");
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("userName");
             });
 
             OnModelCreatingPartial(modelBuilder);
