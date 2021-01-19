@@ -65,22 +65,23 @@ namespace ApiQuanLyGiaoHang.Controllers
                 var user = _db.TheUsers.FirstOrDefault(f => f.UserName == model.Username);
                 if (user != null && CheckPasswordUser(user, model.Password))
                 {
-                    var userRoles = _db.TheRoles.Where(f => f.Id == user.IdRole).ToList();
+                    var userRoles = _db.TheRoles.FirstOrDefault(f => f.Id == user.IdRole);
                     var authClaims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, user.UserName),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     };
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRoles.Name));
 
-                    foreach (var userRole in userRoles)
-                    {
-                        var role = _db.TheRoles.FirstOrDefault(f => f.Id == userRole.Id);
-                        if (role != null)
-                        {
-                            authClaims.Add(new Claim(ClaimTypes.Role, role.Name));
-                        }
+                    //foreach (var userRole in userRoles)
+                    //{
+                    //    var role = _db.TheRoles.FirstOrDefault(f => f.Id == userRole.Id);
+                    //    if (role != null)
+                    //    {
+                    //        authClaims.Add(new Claim(ClaimTypes.Role, role.Name));
+                    //    }
 
-                    }
+                    //}
 
                     var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
@@ -98,7 +99,7 @@ namespace ApiQuanLyGiaoHang.Controllers
                     if (oldToken == null)
                     {
                         var inFoToken = authClaims.FirstOrDefault(f => f.Type == "jti");
-                        oldToken = new TokenUser { IdToken = inFoToken.Value, UserName = user.UserName, Token = loginToken };
+                        oldToken = new TokenUser { IdToken = inFoToken.Value, UserName = user.UserName, Token = loginToken, Roles=userRoles.Name };
                         await _db.TokenUsers.AddAsync(oldToken);
                         await _db.SaveChangesAsync();
                     }
@@ -119,7 +120,6 @@ namespace ApiQuanLyGiaoHang.Controllers
                     Source = exception.Source,
                     StackTrace = exception.StackTrace,
                     Target = exception.TargetSite?.ToString(),
-                    // You should fill this property with details here.
                     InnerExceptionMessage = exception.InnerException?.Message
                 });
             }
@@ -159,40 +159,40 @@ namespace ApiQuanLyGiaoHang.Controllers
         //    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
         //}
 
-        //[HttpPost]
-        //[Route("register-admin")]
-        //public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
-        //{
-        //    var old = _db.TheUsers.FirstOrDefault(f => f.UserName == model.Username);
-        //    if (old == null)
-        //    {
-        //        old = new TheUser
-        //        {
-        //            Id = Guid.NewGuid().ToString(),
-        //            UserName = model.Username,
-        //            Email = model.Email,
-        //            SecurityStamp = Guid.NewGuid().ToString(),
-        //            PasswordHash = MD5Hash(model.Password)
-        //        };
-        //        await _db.TheUsers.AddAsync(old);
-        //        var roleAdmin = _db.TheRoles.FirstOrDefault(f => f.Name == UserRoles.Admin);
-        //        if (roleAdmin == null)
-        //        {
-        //            roleAdmin = new TheRole { Id = Guid.NewGuid().ToString(), Name = UserRoles.Admin };
-        //            await _db.TheRoles.AddAsync(roleAdmin);
-        //        }
-        //        var UserRole = _db.TheRoles.FirstOrDefault(f => f.RoleId == roleAdmin.Id && f.UserId == old.Id);
-        //        if (UserRole == null)
-        //        {
-        //            UserRole = new TheRole { RoleId = roleAdmin.Id, UserId = old.Id };
-        //            await _db.TheRoles.AddAsync(UserRole);
-        //        }
+        [HttpPost]
+        [Route("register-admin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
+        {
+            var old = _db.TheUsers.FirstOrDefault(f => f.UserName == model.Username);
+            if (old == null)
+            {
+                old = new TheUser
+                {
+                    UserName = model.Username,
+                    Name = model.Name,
+                    Pwd = MD5Hash(model.Password),
+                    CreatedAt=DateTime.Now,
+                    IdRole=1,
+                };
+                await _db.TheUsers.AddAsync(old);
+                //var roleAdmin = _db.TheRoles.FirstOrDefault(f => f.Name == UserRoles.Admin);
+                //if (roleAdmin == null)
+                //{
+                //    roleAdmin = new TheRole { Id = Guid.NewGuid().ToString(), Name = UserRoles.Admin };
+                //    await _db.TheRoles.AddAsync(roleAdmin);
+                //}
+                //var UserRole = _db.TheRoles.FirstOrDefault(f => f.RoleId == roleAdmin.Id && f.UserId == old.Id);
+                //if (UserRole == null)
+                //{
+                //    UserRole = new TheRole { RoleId = roleAdmin.Id, UserId = old.Id };
+                //    await _db.TheRoles.AddAsync(UserRole);
+                //}
 
-        //        await _db.SaveChangesAsync();
-        //        return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-        //    }
-        //    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-        //}
+                await _db.SaveChangesAsync();
+                return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+            }
+            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+        }
 
         [HttpPost]
         [Route("logout")]
