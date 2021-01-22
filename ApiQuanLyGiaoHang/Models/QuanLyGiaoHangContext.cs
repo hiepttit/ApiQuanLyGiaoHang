@@ -18,12 +18,15 @@ namespace ApiQuanLyGiaoHang.Models
         }
 
         public virtual DbSet<DeliveryOrder> DeliveryOrders { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<RoleRelationShip> RoleRelationShips { get; set; }
         public virtual DbSet<StockOrder> StockOrders { get; set; }
         public virtual DbSet<TheOrder> TheOrders { get; set; }
         public virtual DbSet<TheRole> TheRoles { get; set; }
         public virtual DbSet<TheUser> TheUsers { get; set; }
         public virtual DbSet<TokenUser> TokenUsers { get; set; }
+        public virtual DbSet<Ward> Wards { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -71,19 +74,51 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.HasOne(d => d.IdStaffNavigation)
                     .WithMany(p => p.DeliveryOrders)
                     .HasForeignKey(d => d.IdStaff)
-                    .HasConstraintName("FK__DeliveryO__idSta__35BCFE0A");
+                    .HasConstraintName("FK__DeliveryO__idSta__3F466844");
 
                 entity.HasOne(d => d.IdTheOrderNavigation)
                     .WithMany(p => p.DeliveryOrders)
                     .HasForeignKey(d => d.IdTheOrder)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DeliveryO__idThe__34C8D9D1");
+                    .HasConstraintName("FK__DeliveryO__idThe__3E52440B");
+            });
+
+            modelBuilder.Entity<District>(entity =>
+            {
+                entity.ToTable("District");
+
+                entity.Property(e => e.LatiLongTude)
+                    .HasMaxLength(50)
+                    .HasComment("Kinh độ, vĩ độ");
+
+                entity.Property(e => e.Name).HasMaxLength(250);
+
+                entity.Property(e => e.Type).HasMaxLength(50);
+
+                entity.HasOne(d => d.Province)
+                    .WithMany(p => p.Districts)
+                    .HasForeignKey(d => d.ProvinceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_District_Province");
+            });
+
+            modelBuilder.Entity<Province>(entity =>
+            {
+                entity.ToTable("Province");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.Type).HasMaxLength(20);
+
+                entity.Property(e => e.ZipCode).HasMaxLength(20);
             });
 
             modelBuilder.Entity<RoleRelationShip>(entity =>
             {
                 entity.HasKey(e => new { e.IdMainRole, e.IdUser })
-                    .HasName("PK__RoleRela__1332FEDFBC4C7BC4");
+                    .HasName("PK__RoleRela__1332FEDFEE20EFCD");
 
                 entity.ToTable("RoleRelationShip");
 
@@ -95,13 +130,13 @@ namespace ApiQuanLyGiaoHang.Models
                     .WithMany(p => p.RoleRelationShips)
                     .HasForeignKey(d => d.IdMainRole)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RoleRelat__idMai__2B3F6F97");
+                    .HasConstraintName("FK__RoleRelat__idMai__34C8D9D1");
 
                 entity.HasOne(d => d.IdUserNavigation)
                     .WithMany(p => p.RoleRelationShips)
                     .HasForeignKey(d => d.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RoleRelat__idUse__2C3393D0");
+                    .HasConstraintName("FK__RoleRelat__idUse__35BCFE0A");
             });
 
             modelBuilder.Entity<StockOrder>(entity =>
@@ -138,7 +173,7 @@ namespace ApiQuanLyGiaoHang.Models
                     .WithMany(p => p.StockOrders)
                     .HasForeignKey(d => d.IdTheOrder)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StockOrde__idThe__38996AB5");
+                    .HasConstraintName("FK__StockOrde__idThe__4222D4EF");
             });
 
             modelBuilder.Entity<TheOrder>(entity =>
@@ -190,7 +225,7 @@ namespace ApiQuanLyGiaoHang.Models
                     .WithMany(p => p.TheOrders)
                     .HasForeignKey(d => d.IdShop)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TheOrder__idShop__30F848ED");
+                    .HasConstraintName("FK__TheOrder__idShop__3A81B327");
             });
 
             modelBuilder.Entity<TheRole>(entity =>
@@ -212,7 +247,7 @@ namespace ApiQuanLyGiaoHang.Models
             {
                 entity.ToTable("TheUser");
 
-                entity.HasIndex(e => e.UserName, "UQ__TheUser__66DCF95C7A3106AD")
+                entity.HasIndex(e => e.UserName, "UQ__TheUser__66DCF95C0416BED3")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -282,7 +317,7 @@ namespace ApiQuanLyGiaoHang.Models
             modelBuilder.Entity<TokenUser>(entity =>
             {
                 entity.HasKey(e => e.IdToken)
-                    .HasName("PK__TokenUse__FEFE350D7FC6F701");
+                    .HasName("PK__TokenUse__FEFE350DD9716DB3");
 
                 entity.ToTable("TokenUser");
 
@@ -307,6 +342,33 @@ namespace ApiQuanLyGiaoHang.Models
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("userName");
+            });
+
+            modelBuilder.Entity<Ward>(entity =>
+            {
+                entity.ToTable("Ward");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.DistrictId).HasColumnName("DistrictID");
+
+                entity.Property(e => e.IsPublished).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.LatiLongTude).HasMaxLength(50);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.SortOrder).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Type).HasMaxLength(50);
+
+                entity.HasOne(d => d.District)
+                    .WithMany(p => p.Wards)
+                    .HasForeignKey(d => d.DistrictId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ward_District");
             });
 
             OnModelCreatingPartial(modelBuilder);

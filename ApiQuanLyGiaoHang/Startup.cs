@@ -92,6 +92,9 @@ namespace ApiQuanLyGiaoHang
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<TheUser>("TheUsers");
+            builder.EntitySet<Province>("Province");
+            builder.EntitySet<District>("District");
+            builder.EntitySet<Ward>("Ward");
             return builder.GetEdmModel();
         }
     }
