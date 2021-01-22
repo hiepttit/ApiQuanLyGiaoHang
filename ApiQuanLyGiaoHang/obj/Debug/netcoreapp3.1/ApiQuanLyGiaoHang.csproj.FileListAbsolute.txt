@@ -62,3 +62,8 @@ D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\ne
 D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.dll
 D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.pdb
 D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.genruntimeconfig.cache
+D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.OData.dll
+D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\Microsoft.OData.Core.dll
+D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\Microsoft.OData.Edm.dll
+D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\Microsoft.Spatial.dll
+D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.MvcApplicationPartsAssemblyInfo.cs

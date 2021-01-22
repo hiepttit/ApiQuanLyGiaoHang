@@ -1,4 +1,6 @@
 using ApiQuanLyGiaoHang.Models;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OData.Edm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +58,7 @@ namespace ApiQuanLyGiaoHang
             });
             services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader()));
             services.AddControllers();
+            services.AddOData();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,10 +79,20 @@ namespace ApiQuanLyGiaoHang
 
             app.UseAuthorization();
 
+            app.UseODataBatching();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapODataRoute("odata", "odata", GetEdmModel());
+                endpoints.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
             });
+        }
+        private static IEdmModel GetEdmModel()
+        {
+            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            builder.EntitySet<TheUser>("TheUsers");
+            return builder.GetEdmModel();
         }
     }
 }

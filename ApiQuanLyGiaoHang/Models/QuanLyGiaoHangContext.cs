@@ -67,18 +67,41 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")
                     .HasColumnName("updatedAt");
+
+                entity.HasOne(d => d.IdStaffNavigation)
+                    .WithMany(p => p.DeliveryOrders)
+                    .HasForeignKey(d => d.IdStaff)
+                    .HasConstraintName("FK__DeliveryO__idSta__35BCFE0A");
+
+                entity.HasOne(d => d.IdTheOrderNavigation)
+                    .WithMany(p => p.DeliveryOrders)
+                    .HasForeignKey(d => d.IdTheOrder)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__DeliveryO__idThe__34C8D9D1");
             });
 
             modelBuilder.Entity<RoleRelationShip>(entity =>
             {
-                entity.HasKey(e => new { e.IdMainRole, e.IdSubRole })
-                    .HasName("PK__RoleRela__D1B7E2064BE771CF");
+                entity.HasKey(e => new { e.IdMainRole, e.IdUser })
+                    .HasName("PK__RoleRela__1332FEDFBC4C7BC4");
 
                 entity.ToTable("RoleRelationShip");
 
                 entity.Property(e => e.IdMainRole).HasColumnName("idMainRole");
 
-                entity.Property(e => e.IdSubRole).HasColumnName("idSubRole");
+                entity.Property(e => e.IdUser).HasColumnName("idUser");
+
+                entity.HasOne(d => d.IdMainRoleNavigation)
+                    .WithMany(p => p.RoleRelationShips)
+                    .HasForeignKey(d => d.IdMainRole)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__RoleRelat__idMai__2B3F6F97");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.RoleRelationShips)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__RoleRelat__idUse__2C3393D0");
             });
 
             modelBuilder.Entity<StockOrder>(entity =>
@@ -110,6 +133,12 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")
                     .HasColumnName("updatedAt");
+
+                entity.HasOne(d => d.IdTheOrderNavigation)
+                    .WithMany(p => p.StockOrders)
+                    .HasForeignKey(d => d.IdTheOrder)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__StockOrde__idThe__38996AB5");
             });
 
             modelBuilder.Entity<TheOrder>(entity =>
@@ -156,6 +185,12 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")
                     .HasColumnName("updatedAt");
+
+                entity.HasOne(d => d.IdShopNavigation)
+                    .WithMany(p => p.TheOrders)
+                    .HasForeignKey(d => d.IdShop)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__TheOrder__idShop__30F848ED");
             });
 
             modelBuilder.Entity<TheRole>(entity =>
@@ -177,7 +212,7 @@ namespace ApiQuanLyGiaoHang.Models
             {
                 entity.ToTable("TheUser");
 
-                entity.HasIndex(e => e.UserName, "UQ__TheUser__66DCF95C43E3F35E")
+                entity.HasIndex(e => e.UserName, "UQ__TheUser__66DCF95C7A3106AD")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -247,7 +282,7 @@ namespace ApiQuanLyGiaoHang.Models
             modelBuilder.Entity<TokenUser>(entity =>
             {
                 entity.HasKey(e => e.IdToken)
-                    .HasName("PK__TokenUse__FEFE350D7A951719");
+                    .HasName("PK__TokenUse__FEFE350D7FC6F701");
 
                 entity.ToTable("TokenUser");
 

@@ -1,4 +1,4 @@
-drop database QuanLyGiaoHang
+create database QuanLyGiaoHang
 go
 --use master drop database QuanLyGiaoHangV1
 use QuanLyGiaoHang
@@ -13,14 +13,6 @@ create table TheRoles
 go
 insert into TheRoles values
 ('Administrator',1,0),('Staff',1,0),('Shop',1,0)
-go
-create table RoleRelationShip
-(
-	idMainRole int not null,-- references dbo.TheRoles(id),
-	idSubRole int not null,-- references dbo.TheRoles(id), -- should not be the main role, except admin and developer
-	primary key(idMainRole,idSubRole)
-)
-insert into RoleRelationShip values (1,2),(1,3)
 go
 create table TheUser
 (
@@ -41,6 +33,14 @@ create table TheUser
 	deletedAt datetime
 )
 go
+create table RoleRelationShip
+(
+	idMainRole int not null references dbo.TheRoles(id),
+	idUser int not null references dbo.TheUser(id), -- should not be the main role, except admin and developer
+	primary key(idMainRole,idUser)
+)
+
+go
 create table TokenUser
 (
 	idToken varchar(200) primary key ,
@@ -52,7 +52,7 @@ go
 create table TheOrder
 (
 	id int primary key identity,
-	idShop int not null,-- references dbo.TheUser(id),
+	idShop int not null references dbo.TheUser(id),
 	customerName nvarchar(100),
 	phoneNumber varchar(30),
 	theAddresss nvarchar(300),
@@ -69,8 +69,8 @@ go
 create table DeliveryOrder
 (
 	id int primary key identity,
-	idTheOrder int not null,-- references dbo.TheOrder(id),
-	idStaff int null,-- references dbo.TheUser(id),
+	idTheOrder int not null references dbo.TheOrder(id),
+	idStaff int null references dbo.TheUser(id),
 	createdAt datetime,
 	updatedAt datetime,
 	dateDeliveryOrder datetime,
@@ -80,7 +80,7 @@ create table DeliveryOrder
 create table StockOrder -- don't use if don't need
 (
 	id int primary key identity,
-	idTheOrder int not null,-- references dbo.TheOrder(id),
+	idTheOrder int not null references dbo.TheOrder(id),
 	amount float,
 	createdAt datetime,
 	updatedAt datetime,

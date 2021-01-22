@@ -15,5 +15,7 @@ namespace ApiQuanLyGiaoHang.Models
         public DateTime? DateReturnToShop { get; set; }
         public int? TheStatus { get; set; }
         public DateTime? DeletedAt { get; set; }
+
+        public virtual TheOrder IdTheOrderNavigation { get; set; }
     }
 }
