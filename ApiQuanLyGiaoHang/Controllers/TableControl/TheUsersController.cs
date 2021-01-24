@@ -16,9 +16,19 @@ namespace ApiQuanLyGiaoHang.Controllers
             _db = db;
         }
         [EnableQuery]
+        //public IActionResult Get()
+        //{
+        //    return Ok(_db.TheUsers);
+        //}
         public IActionResult Get()
         {
-            return Ok(_db.TheUsers);
+            var users = _db.TheUsers.Select(p => new { p.Id, p.Name, p.IdNumber,p.PhoneNumber, p.DateOfIssueIdNumber,p.PlaceOfIssueIdNumber,p.TheAddress,p.BankAccountNumber,p.BankName,p.IdRole});                 
+            return Ok(users);
+        }
+        [EnableQuery]
+        public IActionResult Get([FromODataUri] int key)
+        {
+            return Ok(_db.TheUsers.Where(p => p.IdRole == key && p.IdRole != 1).SelectMany(m => m.Name));
         }
         public async Task<IActionResult> Post([FromBody] TheUser user)
         {

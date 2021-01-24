@@ -95,6 +95,7 @@ namespace ApiQuanLyGiaoHang
             builder.EntitySet<Province>("Province");
             builder.EntitySet<District>("District");
             builder.EntitySet<Ward>("Ward");
+            builder.EntitySet<TheRole>("Roles");
             return builder.GetEdmModel();
         }
     }
