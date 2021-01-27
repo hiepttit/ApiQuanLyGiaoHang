@@ -7363,19 +7363,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tran Hiep\\.nuget\\packages\\": {}
+    "C:\\Users\\HiepTran\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\TranferWeb\\api\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
+      "projectUniqueName": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
       "projectName": "ApiQuanLyGiaoHang",
-      "projectPath": "F:\\TranferWeb\\api\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
-      "packagesPath": "C:\\Users\\Tran Hiep\\.nuget\\packages\\",
-      "outputPath": "F:\\TranferWeb\\api\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\obj\\",
+      "projectPath": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
+      "packagesPath": "C:\\Users\\HiepTran\\.nuget\\packages\\",
+      "outputPath": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Tran Hiep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HiepTran\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7387,6 +7387,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -7398,6 +7399,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
@@ -7436,7 +7438,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

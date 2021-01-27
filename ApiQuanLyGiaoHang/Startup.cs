@@ -94,6 +94,8 @@ namespace ApiQuanLyGiaoHang
             builder.EntitySet<TheUser>("TheUsers");
             builder.EntitySet<Province>("Province");
             builder.EntitySet<District>("District");
+            builder.EntityType<TheUserView>().HasKey(s => new { s.Id });
+            builder.EntitySet<TheUserView>("TheUserView");
             builder.EntitySet<Ward>("Ward");
             builder.EntitySet<TheRole>("Roles");
             return builder.GetEdmModel();

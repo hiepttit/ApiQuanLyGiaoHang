@@ -16,20 +16,17 @@ namespace ApiQuanLyGiaoHang.Controllers
             _db = db;
         }
         [EnableQuery]
-        //public IActionResult Get()
-        //{
-        //    return Ok(_db.TheUsers);
-        //}
+
         public IActionResult Get()
-        {
-            var users = _db.TheUsers.Select(p => new { p.Id, p.Name, p.IdNumber,p.PhoneNumber, p.DateOfIssueIdNumber,p.PlaceOfIssueIdNumber,p.TheAddress,p.BankAccountNumber,p.BankName,p.IdRole});                 
+        {           
+            var users = _db.TheUsers;
             return Ok(users);
         }
-        [EnableQuery]
-        public IActionResult Get([FromODataUri] int key)
-        {
-            return Ok(_db.TheUsers.Where(p => p.IdRole == key && p.IdRole != 1).SelectMany(m => m.Name));
-        }
+        //public IActionResult Get([FromODataUri] int key)
+        //{
+        //    return Ok(_db.TheUsers.Where(p => p.IdRole == key && p.IdRole != 1).SelectMany(m => m.Name));
+        //}
+
         public async Task<IActionResult> Post([FromBody] TheUser user)
         {
             if (!ModelState.IsValid)
@@ -37,6 +34,11 @@ namespace ApiQuanLyGiaoHang.Controllers
                 return BadRequest(ModelState);
             }
             _db.TheUsers.Add(user);
+            await _db.SaveChangesAsync();
+            //RoleRelationShip re = new RoleRelationShip();
+            //re.IdUser = user.Id;
+            //re.IdMainRole = user.IdRole;
+            //_db.RoleRelationShips.Add(re);
             await _db.SaveChangesAsync();
             return Created(user);
         }
@@ -81,6 +83,7 @@ namespace ApiQuanLyGiaoHang.Controllers
             }
             else
             {
+                updateUser.UpdatedAt = DateTime.Now;
                 user.Patch(updateUser);
                 await _db.SaveChangesAsync();
             }
@@ -88,17 +91,32 @@ namespace ApiQuanLyGiaoHang.Controllers
         }
         public async Task<IActionResult> Delete([FromODataUri] int key)
         {
-            TheUser user = await _db.TheUsers.FindAsync(key);
-            if (user == null)
+            //TheUser user = await _db.TheUsers.FindAsync(key);
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            //{
+            //    _db.TheUsers.Remove(user);
+            //    await _db.SaveChangesAsync();
+            //    return NoContent();
+            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            TheUser updateUser = await _db.TheUsers.FindAsync(key);
+            if (updateUser == null)
             {
                 return NotFound();
             }
             else
             {
-                _db.TheUsers.Remove(user);
+                updateUser.DeletedAt = DateTime.Now;
                 await _db.SaveChangesAsync();
-                return NoContent();
             }
+            return Updated(updateUser);
         }
     }
 }
