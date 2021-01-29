@@ -7,7 +7,7 @@ namespace ApiQuanLyGiaoHang.Models
 {
     public partial class TheUserView
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string Name { get; set; }
         public string IdNumber { get; set; }
@@ -18,7 +18,5 @@ namespace ApiQuanLyGiaoHang.Models
         public string BankAccountNumber { get; set; }
         public string BankName { get; set; }
         public int IdRole { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
     }
 }

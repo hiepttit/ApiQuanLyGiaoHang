@@ -7,8 +7,8 @@ namespace ApiQuanLyGiaoHang.Models
 {
     public partial class StockOrder
     {
-        public int Id { get; set; }
-        public int IdTheOrder { get; set; }
+        public string Id { get; set; }
+        public string IdTheOrder { get; set; }
         public double? Amount { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

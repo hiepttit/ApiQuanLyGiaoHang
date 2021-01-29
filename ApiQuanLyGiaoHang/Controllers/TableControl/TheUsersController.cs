@@ -17,53 +17,49 @@ namespace ApiQuanLyGiaoHang.Controllers
         }
         [EnableQuery]
 
-        public IActionResult Get()
-        {           
-            var users = _db.TheUsers;
-            return Ok(users);
-        }
+        //public IActionResult Get()
+        //{           
+        //    var users = _db.TheUsers;
+        //    return Ok(users);
+        //}
         //public IActionResult Get([FromODataUri] int key)
         //{
         //    return Ok(_db.TheUsers.Where(p => p.IdRole == key && p.IdRole != 1).SelectMany(m => m.Name));
         //}
 
-        public async Task<IActionResult> Post([FromBody] TheUser user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            _db.TheUsers.Add(user);
-            await _db.SaveChangesAsync();
-            //RoleRelationShip re = new RoleRelationShip();
-            //re.IdUser = user.Id;
-            //re.IdMainRole = user.IdRole;
-            //_db.RoleRelationShips.Add(re);
-            await _db.SaveChangesAsync();
-            return Created(user);
-        }
-        public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] TheUser user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else if (key != user.Id)
-            {
-                return BadRequest("The key from the url must match the key of the entity in the body");
-            }
-            var originalCustomer = await _db.TheUsers.FindAsync(key);
-            if (originalCustomer == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                _db.Entry(originalCustomer).CurrentValues.SetValues(user);
-                await _db.SaveChangesAsync();
-            }
-            return Updated(user);
-        }
+        //public async Task<IActionResult> Post([FromBody] TheUser user)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    _db.TheUsers.Add(user);
+        //    await _db.SaveChangesAsync();
+        //    await _db.SaveChangesAsync();
+        //    return Created(user);
+        //}
+        //public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] TheUser user)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    else if (key != user.Id)
+        //    {
+        //        return BadRequest("The key from the url must match the key of the entity in the body");
+        //    }
+        //    var originalCustomer = await _db.TheUsers.FindAsync(key);
+        //    if (originalCustomer == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        _db.Entry(originalCustomer).CurrentValues.SetValues(user);
+        //        await _db.SaveChangesAsync();
+        //    }
+        //    return Updated(user);
+        //}
         [AcceptVerbs("PATCH", "MERGE")]
         public async Task<IActionResult> Patch([FromODataUri] int key, [FromBody] Delta<TheUser> user)
         {

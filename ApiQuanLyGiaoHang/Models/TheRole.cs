@@ -13,7 +13,7 @@ namespace ApiQuanLyGiaoHang.Models
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string RoleName { get; set; }
         public int IsMainRole { get; set; }
         public int? IsDeleted { get; set; }
 

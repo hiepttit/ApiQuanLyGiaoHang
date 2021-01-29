@@ -10,11 +10,10 @@ namespace ApiQuanLyGiaoHang.Models
         public TheUser()
         {
             DeliveryOrders = new HashSet<DeliveryOrder>();
-            RoleRelationShips = new HashSet<RoleRelationShip>();
             TheOrders = new HashSet<TheOrder>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string Pwd { get; set; }
         public string Name { get; set; }
@@ -30,8 +29,8 @@ namespace ApiQuanLyGiaoHang.Models
         public int IdRole { get; set; }
         public DateTime? DeletedAt { get; set; }
 
+        public virtual RoleRelationShip RoleRelationShip { get; set; }
         public virtual ICollection<DeliveryOrder> DeliveryOrders { get; set; }
-        public virtual ICollection<RoleRelationShip> RoleRelationShips { get; set; }
         public virtual ICollection<TheOrder> TheOrders { get; set; }
     }
 }

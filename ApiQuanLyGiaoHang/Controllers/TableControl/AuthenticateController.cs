@@ -2,6 +2,7 @@
 using ApiQuanLyGiaoHang.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -65,13 +66,14 @@ namespace ApiQuanLyGiaoHang.Controllers
                 var user = _db.TheUsers.FirstOrDefault(f => f.UserName == model.Username);
                 if (user != null && CheckPasswordUser(user, model.Password))
                 {
-                    var userRoles = _db.TheRoles.FirstOrDefault(f => f.Id == user.IdRole);
+                    //var userRoles = from u in _db.Set<TheUser>().AsNoTracking()
+
                     var authClaims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, user.UserName),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     };
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRoles.Name));
+                    //authClaims.Add(new Claim(ClaimTypes.Role, userRoles.Name));
 
                     //foreach (var userRole in userRoles)
                     //{
@@ -99,7 +101,7 @@ namespace ApiQuanLyGiaoHang.Controllers
                     if (oldToken == null)
                     {
                         var inFoToken = authClaims.FirstOrDefault(f => f.Type == "jti");
-                        oldToken = new TokenUser { IdToken = inFoToken.Value, UserName = user.UserName, Token = loginToken, Roles=userRoles.Name };
+                        //oldToken = new TokenUser { IdToken = inFoToken.Value, UserName = user.UserName, Token = loginToken, Roles=userRoles.Name };
                         await _db.TokenUsers.AddAsync(oldToken);
                         await _db.SaveChangesAsync();
                     }
@@ -161,33 +163,36 @@ namespace ApiQuanLyGiaoHang.Controllers
 
         [HttpPost]
         [Route("register-admin")]
-        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
+        public async Task<IActionResult> RegisterAdmin([FromBody] TheUser model)
         {
-            var old = _db.TheUsers.FirstOrDefault(f => f.UserName == model.Username);
+            var old = await _db.TheUsers.FirstOrDefaultAsync(f => f.UserName == model.UserName);
             if (old == null)
             {
-                old = new TheUser
-                {
-                    UserName = model.Username,
-                    Name = model.Name,
-                    Pwd = MD5Hash(model.Password),
-                    CreatedAt=DateTime.Now,
-                    IdRole=1,
-                };
-                await _db.TheUsers.AddAsync(old);
-                //var roleAdmin = _db.TheRoles.FirstOrDefault(f => f.Name == UserRoles.Admin);
-                //if (roleAdmin == null)
-                //{
-                //    roleAdmin = new TheRole { Id = Guid.NewGuid().ToString(), Name = UserRoles.Admin };
-                //    await _db.TheRoles.AddAsync(roleAdmin);
-                //}
-                //var UserRole = _db.TheRoles.FirstOrDefault(f => f.RoleId == roleAdmin.Id && f.UserId == old.Id);
-                //if (UserRole == null)
-                //{
-                //    UserRole = new TheRole { RoleId = roleAdmin.Id, UserId = old.Id };
-                //    await _db.TheRoles.AddAsync(UserRole);
-                //}
+                model.Pwd = MD5Hash(model.Pwd);
+                model.Id = Guid.NewGuid().ToString();
 
+                //old = new TheUser
+                //{
+                //    Id = Guid.NewGuid().ToString(),
+                //    UserName = model.UserName,
+                //    Name = model.Name,
+                //    Pwd = MD5Hash(model.Pwd),
+                //    IdNumber=model.IdNumber,
+                //    BankAccountNumber=model.BankAccountNumber,
+                //    BankName=model.BankName,
+                //    DateOfIssueIdNumber=model.DateOfIssueIdNumber,
+                //    PhoneNumber=model.PhoneNumber,
+                //    PlaceOfIssueIdNumber=model.PlaceOfIssueIdNumber,
+                //    TheAddress=model.TheAddress,
+                //    IdRole =model.IdRole,
+                //};
+                await _db.TheUsers.AddAsync(model);
+                var re = new RoleRelationShip
+                {
+                    IdUser = model.Id,
+                    IdMainRole = model.IdRole
+                };
+                await _db.RoleRelationShips.AddAsync(re);
                 await _db.SaveChangesAsync();
                 return Ok(new Response { Status = "Success", Message = "User created successfully!" });
             }

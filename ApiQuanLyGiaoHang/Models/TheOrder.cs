@@ -13,8 +13,8 @@ namespace ApiQuanLyGiaoHang.Models
             StockOrders = new HashSet<StockOrder>();
         }
 
-        public int Id { get; set; }
-        public int IdShop { get; set; }
+        public string Id { get; set; }
+        public string IdShop { get; set; }
         public string CustomerName { get; set; }
         public string PhoneNumber { get; set; }
         public string TheAddresss { get; set; }

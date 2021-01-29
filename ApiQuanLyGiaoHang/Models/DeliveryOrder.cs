@@ -7,9 +7,9 @@ namespace ApiQuanLyGiaoHang.Models
 {
     public partial class DeliveryOrder
     {
-        public int Id { get; set; }
-        public int IdTheOrder { get; set; }
-        public int? IdStaff { get; set; }
+        public string Id { get; set; }
+        public string IdTheOrder { get; set; }
+        public string IdStaff { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DateDeliveryOrder { get; set; }

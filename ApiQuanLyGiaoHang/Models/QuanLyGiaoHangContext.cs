@@ -46,7 +46,10 @@ namespace ApiQuanLyGiaoHang.Models
             {
                 entity.ToTable("DeliveryOrder");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
@@ -60,9 +63,16 @@ namespace ApiQuanLyGiaoHang.Models
                     .HasColumnType("datetime")
                     .HasColumnName("deletedAt");
 
-                entity.Property(e => e.IdStaff).HasColumnName("idStaff");
+                entity.Property(e => e.IdStaff)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("idStaff");
 
-                entity.Property(e => e.IdTheOrder).HasColumnName("idTheOrder");
+                entity.Property(e => e.IdTheOrder)
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("idTheOrder");
 
                 entity.Property(e => e.TheStatus)
                     .HasMaxLength(30)
@@ -75,13 +85,13 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.HasOne(d => d.IdStaffNavigation)
                     .WithMany(p => p.DeliveryOrders)
                     .HasForeignKey(d => d.IdStaff)
-                    .HasConstraintName("FK__DeliveryO__idSta__3F466844");
+                    .HasConstraintName("FK__DeliveryO__idSta__35BCFE0A");
 
                 entity.HasOne(d => d.IdTheOrderNavigation)
                     .WithMany(p => p.DeliveryOrders)
                     .HasForeignKey(d => d.IdTheOrder)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DeliveryO__idThe__3E52440B");
+                    .HasConstraintName("FK__DeliveryO__idThe__34C8D9D1");
             });
 
             modelBuilder.Entity<District>(entity =>
@@ -118,33 +128,39 @@ namespace ApiQuanLyGiaoHang.Models
 
             modelBuilder.Entity<RoleRelationShip>(entity =>
             {
-                entity.HasKey(e => new { e.IdMainRole, e.IdUser })
-                    .HasName("PK__RoleRela__1332FEDFEE20EFCD");
+                entity.HasKey(e => e.IdUser)
+                    .HasName("PK_RoleRelationShip_1");
 
                 entity.ToTable("RoleRelationShip");
 
-                entity.Property(e => e.IdMainRole).HasColumnName("idMainRole");
+                entity.Property(e => e.IdUser)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("idUser");
 
-                entity.Property(e => e.IdUser).HasColumnName("idUser");
+                entity.Property(e => e.IdMainRole).HasColumnName("idMainRole");
 
                 entity.HasOne(d => d.IdMainRoleNavigation)
                     .WithMany(p => p.RoleRelationShips)
                     .HasForeignKey(d => d.IdMainRole)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RoleRelat__idMai__34C8D9D1");
+                    .HasConstraintName("FK__RoleRelat__idMai__2B3F6F97");
 
                 entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany(p => p.RoleRelationShips)
-                    .HasForeignKey(d => d.IdUser)
+                    .WithOne(p => p.RoleRelationShip)
+                    .HasForeignKey<RoleRelationShip>(d => d.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RoleRelat__idUse__35BCFE0A");
+                    .HasConstraintName("FK__RoleRelat__idUse__2C3393D0");
             });
 
             modelBuilder.Entity<StockOrder>(entity =>
             {
                 entity.ToTable("StockOrder");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
 
@@ -160,7 +176,11 @@ namespace ApiQuanLyGiaoHang.Models
                     .HasColumnType("datetime")
                     .HasColumnName("deletedAt");
 
-                entity.Property(e => e.IdTheOrder).HasColumnName("idTheOrder");
+                entity.Property(e => e.IdTheOrder)
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("idTheOrder");
 
                 entity.Property(e => e.TheStatus)
                     .HasColumnName("theStatus")
@@ -174,14 +194,17 @@ namespace ApiQuanLyGiaoHang.Models
                     .WithMany(p => p.StockOrders)
                     .HasForeignKey(d => d.IdTheOrder)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StockOrde__idThe__4222D4EF");
+                    .HasConstraintName("FK__StockOrde__idThe__38996AB5");
             });
 
             modelBuilder.Entity<TheOrder>(entity =>
             {
                 entity.ToTable("TheOrder");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Cod).HasColumnName("COD");
 
@@ -197,7 +220,11 @@ namespace ApiQuanLyGiaoHang.Models
                     .HasColumnType("datetime")
                     .HasColumnName("deletedAt");
 
-                entity.Property(e => e.IdShop).HasColumnName("idShop");
+                entity.Property(e => e.IdShop)
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("idShop");
 
                 entity.Property(e => e.IsInStock)
                     .HasColumnName("isInStock")
@@ -226,7 +253,7 @@ namespace ApiQuanLyGiaoHang.Models
                     .WithMany(p => p.TheOrders)
                     .HasForeignKey(d => d.IdShop)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TheOrder__idShop__3A81B327");
+                    .HasConstraintName("FK__TheOrder__idShop__30F848ED");
             });
 
             modelBuilder.Entity<TheRole>(entity =>
@@ -239,19 +266,20 @@ namespace ApiQuanLyGiaoHang.Models
 
                 entity.Property(e => e.IsMainRole).HasColumnName("isMainRole");
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(1000)
-                    .HasColumnName("name");
+                entity.Property(e => e.RoleName).HasMaxLength(1000);
             });
 
             modelBuilder.Entity<TheUser>(entity =>
             {
                 entity.ToTable("TheUser");
 
-                entity.HasIndex(e => e.UserName, "UQ__TheUser__66DCF95C0416BED3")
+                entity.HasIndex(e => e.UserName, "UQ__TheUser__66DCF95C7BD492CD")
                     .IsUnique();
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
 
                 entity.Property(e => e.BankAccountNumber)
                     .HasMaxLength(40)
@@ -329,16 +357,14 @@ namespace ApiQuanLyGiaoHang.Models
                     .HasMaxLength(500)
                     .HasColumnName("bankName");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdAt");
-
                 entity.Property(e => e.DateOfIssueIdNumber)
                     .HasColumnType("datetime")
                     .HasColumnName("dateOfIssueIdNumber");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
                     .HasColumnName("id");
 
                 entity.Property(e => e.IdNumber)
@@ -350,6 +376,7 @@ namespace ApiQuanLyGiaoHang.Models
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(300)
+                    .IsUnicode(false)
                     .HasColumnName("name");
 
                 entity.Property(e => e.PhoneNumber)
@@ -365,10 +392,6 @@ namespace ApiQuanLyGiaoHang.Models
                     .HasMaxLength(300)
                     .HasColumnName("theAddress");
 
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedAt");
-
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasMaxLength(300)
@@ -379,7 +402,7 @@ namespace ApiQuanLyGiaoHang.Models
             modelBuilder.Entity<TokenUser>(entity =>
             {
                 entity.HasKey(e => e.IdToken)
-                    .HasName("PK__TokenUse__FEFE350DD9716DB3");
+                    .HasName("PK__TokenUse__FEFE350D060EDEE7");
 
                 entity.ToTable("TokenUser");
 

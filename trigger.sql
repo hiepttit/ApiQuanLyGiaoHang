@@ -30,7 +30,7 @@ SET userName = 'tthiep'
 from TheUser
 where id=2
 
-alter view TheUser_View as 
+create view TheUser_View as 
 select id,userName, name,idNumber,phoneNumber,dateOfIssueIdNumber,placeOfIssueIdNumber,theAddress,bankAccountNumber,bankName,idRole
 from TheUser
 where idRole<>1

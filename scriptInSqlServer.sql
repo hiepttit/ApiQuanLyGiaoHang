@@ -6,7 +6,7 @@ go
 create table TheRoles
 (
 	id int primary key identity,
-	name nvarchar(1000),
+	RoleName nvarchar(1000),
 	isMainRole int not null default 0,
 	isDeleted int default 0
 )
@@ -16,10 +16,10 @@ insert into TheRoles values
 go
 create table TheUser
 (
-	id int primary key identity,
+	id varchar(300) primary key,
 	userName varchar(300) not null unique,
 	pwd varchar(max) not null,
-	name varchar(300),
+	name nvarchar(300),
 	idNumber varchar(30),
 	phoneNumber varchar(30),
 	dateOfIssueIdNumber datetime,
@@ -36,7 +36,7 @@ go
 create table RoleRelationShip
 (
 	idMainRole int not null references dbo.TheRoles(id),
-	idUser int not null references dbo.TheUser(id), -- should not be the main role, except admin and developer
+	idUser varchar(300) not null references dbo.TheUser(id), -- should not be the main role, except admin and developer
 	primary key(idMainRole,idUser)
 )
 
@@ -51,8 +51,8 @@ create table TokenUser
 go
 create table TheOrder
 (
-	id int primary key identity,
-	idShop int not null references dbo.TheUser(id),
+	id varchar(300) primary key,
+	idShop varchar(300) not null references dbo.TheUser(id),
 	customerName nvarchar(100),
 	phoneNumber varchar(30),
 	theAddresss nvarchar(300),
@@ -68,9 +68,9 @@ create table TheOrder
 go
 create table DeliveryOrder
 (
-	id int primary key identity,
-	idTheOrder int not null references dbo.TheOrder(id),
-	idStaff int null references dbo.TheUser(id),
+	id varchar(300) primary key,
+	idTheOrder varchar(300) not null references dbo.TheOrder(id),
+	idStaff varchar(300) null references dbo.TheUser(id),
 	createdAt datetime,
 	updatedAt datetime,
 	dateDeliveryOrder datetime,
@@ -79,8 +79,8 @@ create table DeliveryOrder
 )
 create table StockOrder -- don't use if don't need
 (
-	id int primary key identity,
-	idTheOrder int not null references dbo.TheOrder(id),
+	id varchar(300) primary key,
+	idTheOrder varchar(300) not null references dbo.TheOrder(id),
 	amount float,
 	createdAt datetime,
 	updatedAt datetime,
