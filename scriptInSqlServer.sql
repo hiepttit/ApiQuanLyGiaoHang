@@ -37,7 +37,7 @@ create table RoleRelationShip
 (
 	idMainRole int not null references dbo.TheRoles(id),
 	idUser varchar(300) not null references dbo.TheUser(id), -- should not be the main role, except admin and developer
-	primary key(idMainRole,idUser)
+	primary key(idUser)
 )
 
 go

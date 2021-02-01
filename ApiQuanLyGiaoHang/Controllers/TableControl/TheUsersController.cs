@@ -26,18 +26,16 @@ namespace ApiQuanLyGiaoHang.Controllers
         //{
         //    return Ok(_db.TheUsers.Where(p => p.IdRole == key && p.IdRole != 1).SelectMany(m => m.Name));
         //}
-
-        //public async Task<IActionResult> Post([FromBody] TheUser user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    _db.TheUsers.Add(user);
-        //    await _db.SaveChangesAsync();
-        //    await _db.SaveChangesAsync();
-        //    return Created(user);
-        //}
+        public async Task<IActionResult> Post([FromBody] TheUser user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            _db.TheUsers.Add(user);
+            await _db.SaveChangesAsync();
+            return Created(user);
+        }
         //public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] TheUser user)
         //{
         //    if (!ModelState.IsValid)
@@ -109,7 +107,7 @@ namespace ApiQuanLyGiaoHang.Controllers
             }
             else
             {
-                updateUser.DeletedAt = DateTime.Now;
+                updateUser.DeletedAt = DateTime.Now.Date;
                 await _db.SaveChangesAsync();
             }
             return Updated(updateUser);

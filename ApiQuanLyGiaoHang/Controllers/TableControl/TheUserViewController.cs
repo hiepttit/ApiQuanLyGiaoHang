@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApiQuanLyGiaoHang.Controllers.TableControl
 {
-    public class TheUserViewController : Controller
+    public class TheUserViewController : ODataController
     {
         private QuanLyGiaoHangContext _db;
         public TheUserViewController(QuanLyGiaoHangContext db)

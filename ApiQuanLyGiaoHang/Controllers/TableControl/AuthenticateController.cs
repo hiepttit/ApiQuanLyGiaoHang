@@ -170,6 +170,7 @@ namespace ApiQuanLyGiaoHang.Controllers
             {
                 model.Pwd = MD5Hash(model.Pwd);
                 model.Id = Guid.NewGuid().ToString();
+                model.CreatedAt = DateTime.Now.Date;
 
                 //old = new TheUser
                 //{

@@ -98,6 +98,7 @@ namespace ApiQuanLyGiaoHang
             builder.EntitySet<TheUserView>("TheUserView");
             builder.EntitySet<Ward>("Ward");
             builder.EntitySet<TheRole>("Roles");
+            builder.EntitySet<TheOrder>("Orders");
             return builder.GetEdmModel();
         }
     }
