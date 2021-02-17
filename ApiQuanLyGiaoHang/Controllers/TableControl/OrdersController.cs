@@ -1,12 +1,15 @@
-﻿using ApiQuanLyGiaoHang.Models;
+﻿using ApiQuanLyGiaoHang.Authentication;
+using ApiQuanLyGiaoHang.Models;
 using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiQuanLyGiaoHang.Controllers.TableControl
+namespace ApiQuanLyGiaoHang.Controllers
 {
     public class OrdersController : ODataController
     {
@@ -30,7 +33,7 @@ namespace ApiQuanLyGiaoHang.Controllers.TableControl
             order.CreatedAt = DateTime.Now.Date;
             await _db.TheOrders.AddAsync(order);
             await _db.SaveChangesAsync();
-            return Created(order);
+            return Ok(new Response { Status = "Success", Message = "Created successfully!" });
         }
         //public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] TheOrder order)
         //{

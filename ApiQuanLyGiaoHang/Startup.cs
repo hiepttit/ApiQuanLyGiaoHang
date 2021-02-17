@@ -99,6 +99,7 @@ namespace ApiQuanLyGiaoHang
             builder.EntitySet<Ward>("Ward");
             builder.EntitySet<TheRole>("Roles");
             builder.EntitySet<TheOrder>("Orders");
+            builder.EntitySet<DeliveryOrder>("DeliveryOrders");
             return builder.GetEdmModel();
         }
     }

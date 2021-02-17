@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiQuanLyGiaoHang.Controllers.Location
+namespace ApiQuanLyGiaoHang.Controllers
 {
     public class ProvinceController : ODataController
     {

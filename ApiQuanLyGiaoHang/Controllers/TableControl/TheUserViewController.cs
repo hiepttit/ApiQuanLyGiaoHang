@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiQuanLyGiaoHang.Controllers.TableControl
+namespace ApiQuanLyGiaoHang.Controllers
 {
     public class TheUserViewController : ODataController
     {
@@ -19,6 +19,10 @@ namespace ApiQuanLyGiaoHang.Controllers.TableControl
         public IActionResult Get()
         {
             return Ok(_db.TheUserViews);
+        }
+        public IActionResult Get([FromODataUri] string key)
+        {
+            return Ok(_db.TheUserViews.Where(p => p.IdRole == 3 && p.Id != key));
         }
     }
 }
