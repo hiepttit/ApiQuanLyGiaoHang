@@ -56,7 +56,7 @@ namespace ApiQuanLyGiaoHang
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader()));
+            services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
             services.AddControllers();
             services.AddOData();
         }
@@ -100,6 +100,7 @@ namespace ApiQuanLyGiaoHang
             builder.EntitySet<TheRole>("Roles");
             builder.EntitySet<TheOrder>("Orders");
             builder.EntitySet<DeliveryOrder>("DeliveryOrders");
+            builder.EntitySet<StockOrder>("StockOrder");
             return builder.GetEdmModel();
         }
     }

@@ -30,6 +30,8 @@ namespace ApiQuanLyGiaoHang.Controllers
                 return BadRequest(ModelState);
             }
             order.Id= Guid.NewGuid().ToString();
+            order.IsInStock = 0;
+            order.IsSuccess = 0;
             order.CreatedAt = DateTime.Now.Date;
             await _db.TheOrders.AddAsync(order);
             await _db.SaveChangesAsync();
@@ -57,31 +59,32 @@ namespace ApiQuanLyGiaoHang.Controllers
         //    }
         //    return Updated(user);
         //}
-        //[AcceptVerbs("PATCH", "MERGE")]
-        //public async Task<IActionResult> Patch([FromODataUri] int key, [FromBody] Delta<TheOrder> order)
-        //{
-        //    object id;
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    else if (order.GetChangedPropertyNames().Contains("Id") && order.TryGetPropertyValue("Id", out id) && (int)id != key)
-        //    {
-        //        return BadRequest("The key from the url must match the key of the entity in the body");
-        //    }
-        //    TheUser updateOrder = await _db.TheOrders.FindAsync(key);
-        //    if (updateOrder == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    else
-        //    {
-        //        updateOrder.UpdatedAt = DateTime.Now;
-        //        order.Patch(updateOrder);
-        //        await _db.SaveChangesAsync();
-        //    }
-        //    return Updated(updateOrder);
-        //}
+        [AcceptVerbs("PATCH", "MERGE")]
+        public async Task<IActionResult> Patch([FromODataUri] string key, [FromBody] Delta<TheOrder> order)
+        {
+            object id;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else if (order.GetChangedPropertyNames().Contains("Id") && order.TryGetPropertyValue("Id", out id) && id.ToString() != key)
+            {
+                return BadRequest("The key from the url must match the key of the entity in the body");
+            }
+            TheOrder updateOrder = await _db.TheOrders.FindAsync(key);
+            if (updateOrder == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                updateOrder.UpdatedAt = DateTime.Now;
+                updateOrder.IsInStock = 1;
+                order.Patch(updateOrder);
+                await _db.SaveChangesAsync();
+            }
+            return Ok(new Response { Status = "Success", Message = "Updated successfully!" });
+        }
         //public async Task<IActionResult> Delete([FromODataUri] int key)
         //{
         //    if (!ModelState.IsValid)

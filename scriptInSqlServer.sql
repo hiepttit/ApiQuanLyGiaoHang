@@ -79,13 +79,15 @@ create table DeliveryOrder
 )
 create table StockOrder -- don't use if don't need
 (
-	id varchar(300) primary key,
+	id varchar(300),
 	idTheOrder varchar(300) not null references dbo.TheOrder(id),
 	amount float,
 	createdAt datetime,
 	updatedAt datetime,
 	dateReturnToShop datetime, -- haven't used
 	theStatus int default 0,
-	deletedAt datetime
+	deletedAt datetime,
+	delaydate datetime
+	primary key(id,idTheOrder)
 )
 go

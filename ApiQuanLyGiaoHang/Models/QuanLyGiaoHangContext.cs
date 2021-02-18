@@ -34,7 +34,7 @@ namespace ApiQuanLyGiaoHang.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=QuanLyGiaoHang;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Initial Catalog=QuanLyGiaoHang;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -85,13 +85,13 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.HasOne(d => d.IdStaffNavigation)
                     .WithMany(p => p.DeliveryOrders)
                     .HasForeignKey(d => d.IdStaff)
-                    .HasConstraintName("FK__DeliveryO__idSta__35BCFE0A");
+                    .HasConstraintName("FK__DeliveryO__idSta__47DBAE45");
 
                 entity.HasOne(d => d.IdTheOrderNavigation)
                     .WithMany(p => p.DeliveryOrders)
                     .HasForeignKey(d => d.IdTheOrder)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DeliveryO__idThe__34C8D9D1");
+                    .HasConstraintName("FK__DeliveryO__idThe__46E78A0C");
             });
 
             modelBuilder.Entity<District>(entity =>
@@ -129,7 +129,7 @@ namespace ApiQuanLyGiaoHang.Models
             modelBuilder.Entity<RoleRelationShip>(entity =>
             {
                 entity.HasKey(e => e.IdUser)
-                    .HasName("PK_RoleRelationShip_1");
+                    .HasName("PK__RoleRela__3717C98277813BAC");
 
                 entity.ToTable("RoleRelationShip");
 
@@ -144,13 +144,13 @@ namespace ApiQuanLyGiaoHang.Models
                     .WithMany(p => p.RoleRelationShips)
                     .HasForeignKey(d => d.IdMainRole)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RoleRelat__idMai__2B3F6F97");
+                    .HasConstraintName("FK__RoleRelat__idMai__3D5E1FD2");
 
                 entity.HasOne(d => d.IdUserNavigation)
                     .WithOne(p => p.RoleRelationShip)
                     .HasForeignKey<RoleRelationShip>(d => d.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RoleRelat__idUse__2C3393D0");
+                    .HasConstraintName("FK__RoleRelat__idUse__3E52440B");
             });
 
             modelBuilder.Entity<StockOrder>(entity =>
@@ -171,6 +171,10 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.Property(e => e.DateReturnToShop)
                     .HasColumnType("datetime")
                     .HasColumnName("dateReturnToShop");
+
+                entity.Property(e => e.Delaydate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("delaydate");
 
                 entity.Property(e => e.DeletedAt)
                     .HasColumnType("datetime")
@@ -194,7 +198,7 @@ namespace ApiQuanLyGiaoHang.Models
                     .WithMany(p => p.StockOrders)
                     .HasForeignKey(d => d.IdTheOrder)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StockOrde__idThe__38996AB5");
+                    .HasConstraintName("FK__StockOrde__idThe__4AB81AF0");
             });
 
             modelBuilder.Entity<TheOrder>(entity =>
@@ -253,7 +257,7 @@ namespace ApiQuanLyGiaoHang.Models
                     .WithMany(p => p.TheOrders)
                     .HasForeignKey(d => d.IdShop)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TheOrder__idShop__30F848ED");
+                    .HasConstraintName("FK__TheOrder__idShop__4316F928");
             });
 
             modelBuilder.Entity<TheRole>(entity =>
@@ -273,7 +277,7 @@ namespace ApiQuanLyGiaoHang.Models
             {
                 entity.ToTable("TheUser");
 
-                entity.HasIndex(e => e.UserName, "UQ__TheUser__66DCF95C7BD492CD")
+                entity.HasIndex(e => e.UserName, "UQ__TheUser__66DCF95CE31022E7")
                     .IsUnique();
 
                 entity.Property(e => e.Id)
@@ -376,7 +380,6 @@ namespace ApiQuanLyGiaoHang.Models
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(300)
-                    .IsUnicode(false)
                     .HasColumnName("name");
 
                 entity.Property(e => e.PhoneNumber)
@@ -402,7 +405,7 @@ namespace ApiQuanLyGiaoHang.Models
             modelBuilder.Entity<TokenUser>(entity =>
             {
                 entity.HasKey(e => e.IdToken)
-                    .HasName("PK__TokenUse__FEFE350D060EDEE7");
+                    .HasName("PK__TokenUse__FEFE350D761D2D3B");
 
                 entity.ToTable("TokenUser");
 
