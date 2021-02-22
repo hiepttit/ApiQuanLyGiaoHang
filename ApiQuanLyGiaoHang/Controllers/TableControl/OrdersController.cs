@@ -32,6 +32,7 @@ namespace ApiQuanLyGiaoHang.Controllers
             order.Id= Guid.NewGuid().ToString();
             order.IsInStock = 0;
             order.IsSuccess = 0;
+            order.TheStatus = 0;
             order.CreatedAt = DateTime.Now.Date;
             await _db.TheOrders.AddAsync(order);
             await _db.SaveChangesAsync();
@@ -79,7 +80,6 @@ namespace ApiQuanLyGiaoHang.Controllers
             else
             {
                 updateOrder.UpdatedAt = DateTime.Now;
-                updateOrder.IsInStock = 1;
                 order.Patch(updateOrder);
                 await _db.SaveChangesAsync();
             }

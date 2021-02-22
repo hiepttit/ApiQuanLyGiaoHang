@@ -155,12 +155,20 @@ namespace ApiQuanLyGiaoHang.Models
 
             modelBuilder.Entity<StockOrder>(entity =>
             {
+                entity.HasKey(e => new { e.Id, e.IdTheOrder })
+                    .HasName("PK__StockOrd__3213E83FFB5BD49E");
+
                 entity.ToTable("StockOrder");
 
                 entity.Property(e => e.Id)
                     .HasMaxLength(300)
                     .IsUnicode(false)
                     .HasColumnName("id");
+
+                entity.Property(e => e.IdTheOrder)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("idTheOrder");
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
 
@@ -179,12 +187,6 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.Property(e => e.DeletedAt)
                     .HasColumnType("datetime")
                     .HasColumnName("deletedAt");
-
-                entity.Property(e => e.IdTheOrder)
-                    .IsRequired()
-                    .HasMaxLength(300)
-                    .IsUnicode(false)
-                    .HasColumnName("idTheOrder");
 
                 entity.Property(e => e.TheStatus)
                     .HasColumnName("theStatus")
@@ -248,6 +250,8 @@ namespace ApiQuanLyGiaoHang.Models
                 entity.Property(e => e.TheAddresss)
                     .HasMaxLength(300)
                     .HasColumnName("theAddresss");
+
+                entity.Property(e => e.TheStatus).HasColumnName("theStatus");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")

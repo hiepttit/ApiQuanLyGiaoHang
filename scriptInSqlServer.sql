@@ -60,6 +60,7 @@ create table TheOrder
 	shipFee float,
 	realReceive float,
 	isSuccess int,
+	theStatus int,
 	isInStock int default 1,
 	createdAt datetime,
 	updatedAt datetime,
