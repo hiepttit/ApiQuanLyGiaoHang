@@ -33,5 +33,19 @@ namespace ApiQuanLyGiaoHang.Controllers.Api
                       };
             return Ok(res);
         }
+        [HttpGet]
+        [Route("GetInStockId")]
+        public IActionResult GetInStockId()
+        {
+            var res = from o in _db.Set<TheOrder>().AsNoTracking()
+                      join st in _db.Set<StockOrder>().AsNoTracking()
+                      on o.Id equals st.IdTheOrder 
+                      where o.IsSuccess != 1 && DateTime.Now.Date==st.Delaydate
+                      select new
+                      {
+                          o.Id,
+                      };
+            return Ok(res);
+        }
     }
 }

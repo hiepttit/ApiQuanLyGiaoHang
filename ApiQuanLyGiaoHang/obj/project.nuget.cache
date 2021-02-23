@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TfL4c6BCBfpZkyjUp3CZfppMkoZQBmCD8z7ZtqBm4oJltSKHfDqCEBzI3/obG0e/TSCPSmzGcHbMg0Z2I7QDJQ==",
+  "dgSpecHash": "xXFkrx8zo0tKtM0Leiom2cZHPQQHzp087kXdHRKW9GVDo4cFHGIDkL9s+3gsFDK1CTXiHnr+bk3D1F0GrWe+kA==",
   "success": true,
   "projectFilePath": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
   "expectedPackageFiles": [
@@ -137,7 +137,8 @@
     "C:\\Users\\HiepTran\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\HiepTran\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\HiepTran\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\HiepTran\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\HiepTran\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\HiepTran\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.12\\microsoft.netcore.app.host.win-x64.3.1.12.nupkg.sha512"
   ],
   "logs": []
 }
