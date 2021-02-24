@@ -13,7 +13,7 @@ namespace ApiQuanLyGiaoHang.Models
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DateDeliveryOrder { get; set; }
-        public string TheStatus { get; set; }
+        public int? TheStatus { get; set; }
         public DateTime? DeletedAt { get; set; }
 
         public virtual TheUser IdStaffNavigation { get; set; }

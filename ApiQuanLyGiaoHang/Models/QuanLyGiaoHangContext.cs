@@ -34,7 +34,7 @@ namespace ApiQuanLyGiaoHang.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;;Initial Catalog=QuanLyGiaoHang;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=QuanLyGiaoHang;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -44,12 +44,20 @@ namespace ApiQuanLyGiaoHang.Models
 
             modelBuilder.Entity<DeliveryOrder>(entity =>
             {
+                entity.HasKey(e => new { e.Id, e.IdTheOrder })
+                    .HasName("PK__Delivery__3213E83FF855B7AA");
+
                 entity.ToTable("DeliveryOrder");
 
                 entity.Property(e => e.Id)
                     .HasMaxLength(300)
                     .IsUnicode(false)
                     .HasColumnName("id");
+
+                entity.Property(e => e.IdTheOrder)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("idTheOrder");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
@@ -68,15 +76,7 @@ namespace ApiQuanLyGiaoHang.Models
                     .IsUnicode(false)
                     .HasColumnName("idStaff");
 
-                entity.Property(e => e.IdTheOrder)
-                    .IsRequired()
-                    .HasMaxLength(300)
-                    .IsUnicode(false)
-                    .HasColumnName("idTheOrder");
-
-                entity.Property(e => e.TheStatus)
-                    .HasMaxLength(30)
-                    .HasColumnName("theStatus");
+                entity.Property(e => e.TheStatus).HasColumnName("theStatus");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")

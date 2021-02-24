@@ -69,14 +69,15 @@ create table TheOrder
 go
 create table DeliveryOrder
 (
-	id varchar(300) primary key,
+	id varchar(300),
 	idTheOrder varchar(300) not null references dbo.TheOrder(id),
 	idStaff varchar(300) null references dbo.TheUser(id),
 	createdAt datetime,
 	updatedAt datetime,
 	dateDeliveryOrder datetime,
-	theStatus nvarchar(30),
-	deletedAt datetime
+	theStatus int,
+	deletedAt datetime,
+	primary key(id,idTheOrder)
 )
 create table StockOrder -- don't use if don't need
 (

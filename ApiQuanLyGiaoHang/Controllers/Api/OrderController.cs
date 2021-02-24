@@ -40,7 +40,7 @@ namespace ApiQuanLyGiaoHang.Controllers.Api
             var res = from o in _db.Set<TheOrder>().AsNoTracking()
                       join st in _db.Set<StockOrder>().AsNoTracking()
                       on o.Id equals st.IdTheOrder 
-                      where o.IsSuccess != 1 && DateTime.Now.Date==st.Delaydate
+                      where o.IsSuccess != 1 && DateTime.Now.Date==st.Delaydate && st.DeletedAt==null
                       select new
                       {
                           o.Id,
