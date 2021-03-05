@@ -34,7 +34,7 @@ namespace ApiQuanLyGiaoHang.Controllers
             }
             _db.TheUsers.Add(user);
             await _db.SaveChangesAsync();
-            return Created(user);
+            return Ok(new Response { Status = "Success", Message = "Created successfully!" });
         }
         //public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] TheUser user)
         //{
