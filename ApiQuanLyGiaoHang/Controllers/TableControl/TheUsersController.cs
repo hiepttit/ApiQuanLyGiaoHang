@@ -1,4 +1,5 @@
-﻿using ApiQuanLyGiaoHang.Models;
+﻿using ApiQuanLyGiaoHang.Authentication;
+using ApiQuanLyGiaoHang.Models;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using System;
