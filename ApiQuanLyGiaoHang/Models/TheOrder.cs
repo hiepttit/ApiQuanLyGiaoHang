@@ -17,7 +17,7 @@ namespace ApiQuanLyGiaoHang.Models
         public string IdShop { get; set; }
         public string CustomerName { get; set; }
         public string PhoneNumber { get; set; }
-        public string TheAddresss { get; set; }
+        public string TheAddress { get; set; }
         public double? Cod { get; set; }
         public double? ShipFee { get; set; }
         public double? RealReceive { get; set; }

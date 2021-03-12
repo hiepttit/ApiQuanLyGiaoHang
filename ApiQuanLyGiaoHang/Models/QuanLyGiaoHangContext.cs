@@ -247,9 +247,9 @@ namespace ApiQuanLyGiaoHang.Models
 
                 entity.Property(e => e.ShipFee).HasColumnName("shipFee");
 
-                entity.Property(e => e.TheAddresss)
+                entity.Property(e => e.TheAddress)
                     .HasMaxLength(300)
-                    .HasColumnName("theAddresss");
+                    .HasColumnName("theAddress");
 
                 entity.Property(e => e.TheStatus).HasColumnName("theStatus");
 
