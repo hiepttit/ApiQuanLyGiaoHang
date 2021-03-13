@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj": {}
+    "E:\\SubProject\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj": {}
   },
   "projects": {
-    "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj": {
+    "E:\\SubProject\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
+        "projectUniqueName": "E:\\SubProject\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
         "projectName": "ApiQuanLyGiaoHang",
-        "projectPath": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
-        "packagesPath": "C:\\Users\\HiepTran\\.nuget\\packages\\",
-        "outputPath": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\obj\\",
+        "projectPath": "E:\\SubProject\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
+        "packagesPath": "C:\\Users\\QUOC\\.nuget\\packages\\",
+        "outputPath": "E:\\SubProject\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HiepTran\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\QUOC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -69,12 +69,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.12, 3.1.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
