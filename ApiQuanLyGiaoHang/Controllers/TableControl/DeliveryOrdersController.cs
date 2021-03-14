@@ -2,6 +2,7 @@
 using ApiQuanLyGiaoHang.Models;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
+using shortid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,15 @@ namespace ApiQuanLyGiaoHang.Controllers
         {
             return Ok(_db.DeliveryOrders);
         }
+
+        [Obsolete]
         public async Task<IActionResult> Post([FromBody] DeliveryOrder delivery)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            delivery.Id = Guid.NewGuid().ToString();
+            delivery.Id = ShortId.Generate(true, false, 12);
             delivery.TheStatus = 0;
             delivery.CreatedAt = DateTime.Now.Date;
             await _db.DeliveryOrders.AddAsync(delivery);

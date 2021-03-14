@@ -69,7 +69,6 @@ D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\ne
 D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.MvcApplicationPartsAssemblyInfo.cs
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\appsettings.Development.json
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\appsettings.json
-F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.exe
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.deps.json
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.runtimeconfig.json
@@ -136,3 +135,5 @@ F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\st
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.dll
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.pdb
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.genruntimeconfig.cache
+F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\scopedcss\bundle\ApiQuanLyGiaoHang.styles.css
+F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\shortid.dll

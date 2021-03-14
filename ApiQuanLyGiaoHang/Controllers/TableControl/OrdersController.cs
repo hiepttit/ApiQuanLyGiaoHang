@@ -4,6 +4,7 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using shortid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,15 @@ namespace ApiQuanLyGiaoHang.Controllers
         {
             return Ok(_db.TheOrders);
         }
+
+        [Obsolete]
         public async Task<IActionResult> Post([FromBody] TheOrder order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            order.Id= Guid.NewGuid().ToString();
+            order.Id= ShortId.Generate(true, false, 12);
             order.IsInStock = 0;
             order.IsSuccess = 0;
             order.TheStatus = 0;

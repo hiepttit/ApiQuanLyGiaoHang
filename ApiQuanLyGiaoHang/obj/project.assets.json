@@ -740,6 +740,15 @@
           }
         }
       },
+      "shortid/3.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/shortid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/shortid.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3243,6 +3252,21 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "shortid/3.0.0": {
+      "sha512": "aiZDBbpGypfkDGf+ZEYbBf24I/Q9CcDGyi6PBntCdAXgKGdjdE/QWijdTLILKqP4ugnyL0G4iF9RA1lhhQZtxw==",
+      "type": "package",
+      "path": "shortid/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.1/shortid.dll",
+        "lib/netstandard1.3/shortid.dll",
+        "lib/netstandard1.6/shortid.dll",
+        "lib/netstandard2.0/shortid.dll",
+        "shortid.3.0.0.nupkg.sha512",
+        "shortid.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -7359,23 +7383,24 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.11",
       "Microsoft.AspNetCore.OData >= 7.5.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.2",
-      "Microsoft.EntityFrameworkCore.Tools >= 5.0.2"
+      "Microsoft.EntityFrameworkCore.Tools >= 5.0.2",
+      "shortid >= 3.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HiepTran\\.nuget\\packages\\": {}
+    "C:\\Users\\Tran Hiep\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
+      "projectUniqueName": "F:\\TranferWeb\\api\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
       "projectName": "ApiQuanLyGiaoHang",
-      "projectPath": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
-      "packagesPath": "C:\\Users\\HiepTran\\.nuget\\packages\\",
-      "outputPath": "D:\\project C#\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\obj\\",
+      "projectPath": "F:\\TranferWeb\\api\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang.csproj",
+      "packagesPath": "C:\\Users\\Tran Hiep\\.nuget\\packages\\",
+      "outputPath": "F:\\TranferWeb\\api\\ApiQuanLyGiaoHang\\ApiQuanLyGiaoHang\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HiepTran\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tran Hiep\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7418,6 +7443,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[5.0.2, )"
+          },
+          "shortid": {
+            "target": "Package",
+            "version": "[3.0.0, )"
           }
         },
         "imports": [
@@ -7430,12 +7459,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.12, 3.1.12]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -7444,7 +7467,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
