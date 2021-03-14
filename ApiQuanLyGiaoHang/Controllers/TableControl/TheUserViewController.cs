@@ -22,7 +22,7 @@ namespace ApiQuanLyGiaoHang.Controllers
         }
         public IActionResult Get([FromODataUri] string key)
         {
-            return Ok(_db.TheUserViews.Where(p => p.IdRole == 3 && p.Id != key));
+            return Ok(_db.TheUserViews.Where(p => p.IdRole == 3 && p.Id == key));
         }
     }
 }
