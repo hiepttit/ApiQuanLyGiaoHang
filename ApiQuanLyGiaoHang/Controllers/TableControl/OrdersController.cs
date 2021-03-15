@@ -36,7 +36,6 @@ namespace ApiQuanLyGiaoHang.Controllers
             order.IsInStock = 0;
             order.IsSuccess = 0;
             order.TheStatus = 0;
-            order.CreatedAt = DateTime.Now.Date;
             await _db.TheOrders.AddAsync(order);
             await _db.SaveChangesAsync();
             return Ok(new Response { Status = "Success", Message = "Created successfully!" });

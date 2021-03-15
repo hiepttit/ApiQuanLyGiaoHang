@@ -137,3 +137,4 @@ F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\Ap
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\ApiQuanLyGiaoHang.genruntimeconfig.cache
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\obj\Debug\netcoreapp3.1\scopedcss\bundle\ApiQuanLyGiaoHang.styles.css
 F:\TranferWeb\api\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\shortid.dll
+D:\project C#\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\ApiQuanLyGiaoHang\bin\Debug\netcoreapp3.1\shortid.dll
