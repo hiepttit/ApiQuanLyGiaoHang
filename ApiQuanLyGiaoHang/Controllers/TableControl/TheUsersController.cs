@@ -60,14 +60,14 @@ namespace ApiQuanLyGiaoHang.Controllers
         //    return Updated(user);
         //}
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IActionResult> Patch([FromODataUri] int key, [FromBody] Delta<TheUser> user)
+        public async Task<IActionResult> Patch([FromODataUri] string key, [FromBody] Delta<TheUser> user)
         {
             object id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            else if (user.GetChangedPropertyNames().Contains("Id") && user.TryGetPropertyValue("Id", out id) && (int)id != key)
+            else if (user.GetChangedPropertyNames().Contains("Id") && user.TryGetPropertyValue("Id", out id) && id.ToString() != key)
             {
                 return BadRequest("The key from the url must match the key of the entity in the body");
             }
@@ -82,7 +82,7 @@ namespace ApiQuanLyGiaoHang.Controllers
                 user.Patch(updateUser);
                 await _db.SaveChangesAsync();
             }
-            return Updated(updateUser);
+            return Ok(new Response { Status = "Success", Message = "Updated successfully!" });
         }
         public async Task<IActionResult> Delete([FromODataUri] int key)
         {
