@@ -27,6 +27,7 @@ namespace ApiQuanLyGiaoHang.Models
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
         public int? TheStatus { get; set; }
+        public double? Coefficient { get; set; }
 
         public virtual TheUser IdShopNavigation { get; set; }
         public virtual ICollection<DeliveryOrder> DeliveryOrders { get; set; }

@@ -100,6 +100,7 @@ namespace ApiQuanLyGiaoHang
             builder.EntitySet<TheRole>("Roles");
             builder.EntitySet<TheOrder>("Orders");
             builder.EntitySet<DeliveryOrder>("DeliveryOrders");
+            builder.EntitySet<BasicSalary>("BasicSalary");
             builder.EntitySet<StockOrder>("StockOrder");
             return builder.GetEdmModel();
         }

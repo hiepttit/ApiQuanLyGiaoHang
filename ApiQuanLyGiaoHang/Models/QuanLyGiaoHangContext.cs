@@ -17,6 +17,7 @@ namespace ApiQuanLyGiaoHang.Models
         {
         }
 
+        public virtual DbSet<BasicSalary> BasicSalaries { get; set; }
         public virtual DbSet<DeliveryOrder> DeliveryOrders { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
@@ -34,13 +35,26 @@ namespace ApiQuanLyGiaoHang.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=QuanLyGiaoHang;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=QuanLyGiaoHang;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<BasicSalary>(entity =>
+            {
+                entity.ToTable("BasicSalary");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Salary).HasColumnName("salary");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("updatedAt");
+            });
 
             modelBuilder.Entity<DeliveryOrder>(entity =>
             {
@@ -59,13 +73,13 @@ namespace ApiQuanLyGiaoHang.Models
                     .IsUnicode(false)
                     .HasColumnName("idTheOrder");
 
+                entity.Property(e => e.Amount).HasColumnName("amount");
+
+                entity.Property(e => e.Coefficient).HasColumnName("coefficient");
+
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
                     .HasColumnName("createdAt");
-
-                entity.Property(e => e.DateDeliveryOrder)
-                    .HasColumnType("datetime")
-                    .HasColumnName("dateDeliveryOrder");
 
                 entity.Property(e => e.DeletedAt)
                     .HasColumnType("datetime")
@@ -213,6 +227,8 @@ namespace ApiQuanLyGiaoHang.Models
                     .HasColumnName("id");
 
                 entity.Property(e => e.Cod).HasColumnName("COD");
+
+                entity.Property(e => e.Coefficient).HasColumnName("coefficient");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")

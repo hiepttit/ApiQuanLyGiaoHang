@@ -37,7 +37,7 @@ namespace ApiQuanLyGiaoHang.Controllers
                 return Problem("Hàng đã có trong kho!");
             }
             var delivery = _db.DeliveryOrders.FirstOrDefault(p => p.IdTheOrder == stock.IdTheOrder);
-            delivery.TheStatus = 1;
+            delivery.TheStatus = 2;
             stock.Id = Guid.NewGuid().ToString();
             stock.CreatedAt = DateTime.Now.Date;
             stock.TheStatus = 0;

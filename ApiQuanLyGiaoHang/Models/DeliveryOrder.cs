@@ -12,9 +12,10 @@ namespace ApiQuanLyGiaoHang.Models
         public string IdStaff { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public DateTime? DateDeliveryOrder { get; set; }
+        public double? Coefficient { get; set; }
         public int? TheStatus { get; set; }
         public DateTime? DeletedAt { get; set; }
+        public double? Amount { get; set; }
 
         public virtual TheUser IdStaffNavigation { get; set; }
         public virtual TheOrder IdTheOrderNavigation { get; set; }

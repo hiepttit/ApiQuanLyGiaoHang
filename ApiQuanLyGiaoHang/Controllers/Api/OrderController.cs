@@ -30,6 +30,7 @@ namespace ApiQuanLyGiaoHang.Controllers.Api
                       select new
                       {
                           o.Id,
+                          o.Coefficient
                       };
             return Ok(res);
         }
@@ -44,6 +45,7 @@ namespace ApiQuanLyGiaoHang.Controllers.Api
                       select new
                       {
                           o.Id,
+                          o.Coefficient
                       };
             return Ok(res);
         }

@@ -31,7 +31,6 @@ namespace ApiQuanLyGiaoHang.Controllers
                 return BadRequest(ModelState);
             }
             delivery.Id = ShortId.Generate(true, false, 12);
-            delivery.TheStatus = 0;
             delivery.CreatedAt = DateTime.Now.Date;
             await _db.DeliveryOrders.AddAsync(delivery);
             await _db.SaveChangesAsync();
@@ -64,7 +63,9 @@ namespace ApiQuanLyGiaoHang.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    updatedelivery.UpdatedAt = DateTime.Now;
+                    delivery.Patch(updatedelivery);
+                    await _db.SaveChangesAsync();
                 }
                 
             }
